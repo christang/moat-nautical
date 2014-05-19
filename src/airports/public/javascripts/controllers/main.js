@@ -8,7 +8,15 @@ angular.module('airportApp')
     var Airports = $resource('/airports'),
         airports = Airports.get({}, function(data) {
           airports = data.airports;
+          checkAirport(0)($scope.airport[0].key);
+          checkAirport(1)($scope.airport[1].key);
         });
+
+    var LatLng = {
+      from: function (data) {
+        return new google.maps.LatLng(data.latitude, data.longitude);
+      }
+    };
 
     $scope.map = {
       center: {
@@ -25,14 +33,13 @@ angular.module('airportApp')
 
     $scope.$watch('airport[0].key', checkAirport(0));
     $scope.$watch('airport[1].key', checkAirport(1));
-
     $scope.$watch('airport[0].location && airport[1].location', setNauticalMiles);
 
     function setNauticalMiles() {
       if ($scope.airport[0].location && $scope.airport[1].location) {
         $scope.distance = google.maps.geometry.spherical.computeDistanceBetween(
-          $scope.airport[0].location,
-          $scope.airport[1].location
+          LatLng.from($scope.airport[0].location),
+          LatLng.from($scope.airport[1].location)
         ) * M2NMi;
       } else {
         $scope.distance = 0;
@@ -55,7 +62,10 @@ angular.module('airportApp')
       Airports.get({q: airport.key}, function(data) {
         airport.name = data.name;
         airport.iata = data.iata;
-        airport.location = new google.maps.LatLng(data.latitude, data.longitude);
+        airport.location = {
+          latitude: data.latitude,
+          longitude: data.longitude
+        };
       });
     }
 

@@ -1,7 +1,10 @@
-<google-map center="map.center" zoom="map.zoom" draggable="true"></google-map>
+<google-map center="map.center" zoom="map.zoom" draggable="true">
+  <marker ng-repeat="a in airport" ng-if="a.location" coords="a.location"></marker>
+  <polyline ng-if="distance" path="[airport[0].location,airport[1].location]" geodesic="true"></polyline>
+</google-map>
 <form>
 <label>Airport 1</label> <input type="text" ng-model="airport[0].key"></input> {{ airport[0].name }} <br/>
 <label>Airport 2</label> <input type="text" ng-model="airport[1].key"></input> {{ airport[1].name }} <br/>
-<br/><span ng-if="!distance">Tell me two non-identical airports in the US</span>
+<br/><span ng-if="!distance">Please tell me two non-identical airports in the US.</span>
 <span ng-if="distance">It is {{ distance | number : 2 }} nautical miles from {{ airport[0].name }} to {{ airport[1].name }}.</span><br/>
 </form>
