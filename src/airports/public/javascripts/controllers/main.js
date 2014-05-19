@@ -7,7 +7,7 @@ angular.module('airportApp')
 
     var Airports = $resource('/airports'),
         airports = Airports.get({}, function(data) {
-          airports = data.airports;
+          $scope.airports = airports = data.airports;
           checkAirport(0)($scope.airport[0].key);
           checkAirport(1)($scope.airport[1].key);
         });
