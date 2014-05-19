@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      .angular-google-map-container { height: 400px; }
+    </style>
+  </head>
+  <body ng-app="airportApp">
+    <div ng-view=""></div>
+
+    <!-- angular libs -->
+    <script type="text/javascript" src="javascripts/lib/jquery.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular-resource.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular-sanitize.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular-route.js"></script>
+
+    <!-- google map libs -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS1jKrM4uIPkO0KvJ6XJ6dNZol5Kjktto&sensor=false"></script>
+    <script type="text/javascript" src="javascripts/lib/underscore.js"></script>
+    <script type="text/javascript" src="javascripts/lib/angular-google-maps.js"></script>
+
+    <!-- angular application -->
+    <script type="text/javascript" src="javascripts/app.js"></script>
+    <script type="text/javascript" src="javascripts/controllers/main.js"></script>
+
+  </body>
+</html>
