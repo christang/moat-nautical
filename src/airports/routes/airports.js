@@ -48,8 +48,12 @@ csv()
   .transform(function(row) {
     var airport = Airport.from(row);
     if (isUS(airport.country)) {
-      cache.put(airport.name, airport);
-      cache.put(airport.iata, airport);
+      if (airport.name) {
+        cache.put(airport.name, airport);  
+      }
+      if (airport.iata) {
+        cache.put(airport.iata, airport);
+      }
       airports += 1;
     }
     return row;
@@ -63,7 +67,7 @@ router.get('/', function(req, res) {
   if (_.has(req.query, 'q')) {
     res.send(cache.get(req.query['q']));
   } else {
-    res.send(cache.keys());
+    res.send({airports: cache.keys()});
   }
 });
 
